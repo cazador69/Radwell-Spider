@@ -11,37 +11,37 @@ from selenium.webdriver.remote.webelement import WebElement
 
 
 
-
+#start the spider
 class RadwellSpider(scrapy.Spider):
     name = "Radwell"
 
+    #fetch the intended URLs with automated web browser
     driver = webdriver.Chrome()
     driver.get('https://www.radwell.com/en-US/')
     time.sleep(2)
-
     listy = []
 
-    # list_length = driver.find_element_by_xpath('//*[@id="nav"]/div/ul/li').length
+   
 
     grabs = driver.find_elements_by_xpath('//*[@id="nav"]/div/ul/li/a')
-    for grab in grabs:
-        href = grab.get_attribute('href')
+        for grab in grabs:
+            href = grab.get_attribute('href')
 
-        listy.append(href)
-
-
-    start_urls = listy
+            listy.append(href)
+            
+        start_urls = listy
 
     print(start_urls)
-    print ('here')
+    
+    #troubleshooting with print statements if necessary
+    print ('you are here in the program')
 
 
 
     def parse(self, response):
 
-        #extracting content using css extractors
-
-
+        
+        #extracting content using css extractors then put into dictionary 
         for tool in response.css('a.searchResult'):
 
             model_num = tool.css('h2.partnoi::text').extract()
@@ -65,10 +65,7 @@ class RadwellSpider(scrapy.Spider):
 
 
 
-        #filename = 'radwell.html'
-        #with open(filename, 'wb') as f:
-        #    f.write(response.body)
-        #self.log('Saved file %s' % filename)
+        
 
 
 
