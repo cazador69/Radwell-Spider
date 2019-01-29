@@ -1,0 +1,19 @@
+            for item in zip(model_num, mfg, description, price):
+
+                    #create dictionary for scraped info
+                    scraped_info = {
+                            'model_num': item[0],
+                            'mfg': item[1],
+                            'description': item[2],
+                            'price': item[3],
+                        }
+
+        yield scraped_info
+
+
+
+
+        'model_num': tool.css('h2.partnoi::text').extract(),
+        'mfg': tool.css('h2.mfgri::text').extract(),
+        'description': tool.css('p.desc.searchResulti::text').extract(),
+        'price': tool.css('span.searchPr::text').extract(),
